@@ -1,0 +1,8 @@
+---
+# handlers file for docker
+
+- name: Starting docker
+  become: yes
+  become_user: root
+  command: systemctl start docker
+  listen: "start docker"

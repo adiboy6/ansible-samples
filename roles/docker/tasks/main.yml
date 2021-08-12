@@ -1,0 +1,42 @@
+---
+# tasks file for docker
+- name: Install yum-utils
+  become: yes
+  yum:
+    name: yum-utils
+    update_cache: yes
+    state: present
+
+- name: Add repository
+  yum_repository:
+    name: Docker CE Stable
+    description: Docker package to setup stable repo
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    state: present
+
+- name: Install Docker CE
+  become: yes
+  yum:
+    name: docker-ce
+    update_cache: yes
+    state: present
+
+- name: Install Docker CE CLI
+  become: yes
+  yum:
+    name: docker-ce-cli
+    update_cache: yes
+    state: present
+
+- name: Install Containerd.io
+  become: yes
+  yum:
+    name: containerd.io
+    update_cache: yes
+    state: present
+  notify:
+    "start docker"
+

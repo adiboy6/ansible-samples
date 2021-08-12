@@ -1,0 +1,17 @@
+---
+# tasks file for logrotate
+- name: Install logrotate
+  become: yes
+  yum:
+    name: logrotate
+    update_cache: yes
+    state: present
+
+# make changes in the nginx template file
+- name: Copying the nginx file to logrotate.d
+  template:
+    owner: 'root'
+    force: yes
+    src: nginx.j2
+    dest: /etc/logrotate.d/nginx
+    mode: 0644

@@ -1,0 +1,27 @@
+---
+# tasks file for nginx
+
+- name: Ensure that epel-release package exists
+  yum:
+    name: epel-release
+    state: present
+    update_cache: yes
+
+- name: Installing nginx
+  yum:
+    name: nginx
+    state: present
+    update_cache: yes
+  notify:
+    "start nginx"
+
+# nginx.conf file copy
+- name: Copying the nginx file to logrotate.d
+  template:
+    owner: 'root'
+    force: yes
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+  notify:
+    "start nginx"

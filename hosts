@@ -1,0 +1,6 @@
+[sample]
+vagrant@192.168.33.32
+
+[actual]
+vagrant@192.168.33.32
+vagrant@192.168.33.33
